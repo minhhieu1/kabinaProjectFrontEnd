@@ -53,10 +53,10 @@
 
     <div style="text-align: center">
       Start Date:
-      <input type="date" id="startDate" name="startDate" [(ngModel)]="booklistUpdate['startDate']"
+      <input type="date" id="startDate" name="startDate" [(ngModel)]="bookingUpdate['startDate']"
       min="{{ minMax.min }}"max="{{ minMax.max }}" [ngClass]="{uneditable: !editStartDate}" />
       End Date:
-      <input type="date" id="endDate" name="endDate" [(ngModel)]="booklistUpdate['endDate']" min="{{ minMax.min }}"max="{{ minMax.max }}"  />
+      <input type="date" id="endDate" name="endDate ||  minMax.min " [(ngModel)]="bookingUpdate['endDate']" min="{{ minMax.min }}"max="{{ minMax.max }}"  />
     </div>
 
     <hr>
