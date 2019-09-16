@@ -8,20 +8,24 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import 'rxjs/Rx';
 import { HttpEvent } from '@angular/common/http';
 import { HttpEventType } from '@angular/common/http';
+import { AuthenticationService } from './authentication.service';
+import { User } from 'src/app/models/user';
 
 @Injectable()
 export class RestService {
     private headers: HttpHeaders;
     private options: RequestOptions;
+    private currentUser: User;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private AuthenticationService: AuthenticationService) {
+        this.currentUser = this.AuthenticationService.currentUserValue;
         this.headers = this.getHeaders();
     }
-
     getHeaders() {
         return new HttpHeaders()
             .set('Content-Type', 'application/json')
             .set('Accept', 'application/json')
+            .set('Authorization', "Bearer "+this.currentUser.jwttoken)
             ;
     }
 
@@ -78,6 +82,7 @@ export class RestService {
 
     deleteByUrl(url: string, headers?: HttpHeaders, removeEmpty = false) {
         return this.http.delete(url, { headers: headers || this.getHeaders() }).pipe(catchError(this.handleError));;
+        // return this.http.get(url, { headers: headers || this.getHeaders() }).pipe(catchError(this.handleError));;
     }
 
     private handleError(error: Response | any) {
