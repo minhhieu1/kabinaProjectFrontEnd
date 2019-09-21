@@ -13,6 +13,8 @@ import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ChartsModule } from 'ng2-charts';
 import { TablesComponent } from 'src/app/pages/tables/tables.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { ReadXlsxComponent } from '../../pages/read-xlsx/read-xlsx.component';
 
 // import { ToastrModule } from 'ngx-toastr';
 
@@ -25,12 +27,14 @@ import { TablesComponent } from 'src/app/pages/tables/tables.component';
     ClipboardModule,
     ChartsModule,
     ReactiveFormsModule,
-    UserLayoutModule
+    UserLayoutModule,
+    NgxPaginationModule,
   ],
   declarations: [
     DashboardComponent,
     BookingAdminComponent,
-    AdminUserlistComponent
+    AdminUserlistComponent,
+    ReadXlsxComponent,
   ]
 })
 
