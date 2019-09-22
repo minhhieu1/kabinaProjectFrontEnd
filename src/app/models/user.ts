@@ -15,5 +15,5 @@ export class User {
         unitName: string,
         leaderId: number
     };
-    token: string;
+    jwttoken: string;
 }
