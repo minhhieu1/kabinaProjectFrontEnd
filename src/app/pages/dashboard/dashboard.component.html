@@ -1,4 +1,7 @@
-<div class="header pb-8 pt-5 pt-md-8" style="min-height: 50px; background-image: url(assets/images/common/banner.png); background-size: cover; background-position: center top;">
+<div
+  class="header pb-8 pt-5 pt-md-8"
+  style="min-height: 50px; background-image: url(assets/images/common/banner.png); background-size: cover; background-position: center top;"
+>
   <div class="container-fluid">
     <div class="header-body">
       <!-- Card stats -->
@@ -8,28 +11,41 @@
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Available Shelves</h5>
-                  <span class="h2 font-weight-bold mb-0">{{businessAvailable + "/" + (businessAvailable+businessBooked) }}</span>
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                    Free Shelves
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0">{{
+                    free + "/" + (free + used + full)
+                  }}</span>
                 </div>
                 <div class="col-auto">
-                  <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                    <i class="ni ni-building"></i>
+                  <div
+                    class="icon icon-shape text-white rounded-circle shadow free"
+                  >
+                    <i class="ni ni-building tẽt"></i>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div class="col-xl-3 col-lg-6">
           <div class="card card-stats mb-4 mb-xl-0">
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <h5 class="card-title text-uppercase text-muted mb-0">Booked Shelves</h5>
-                  <span class="h2 font-weight-bold mb-0">{{businessBooked + "/" + (businessAvailable+businessBooked) }}</span>
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                    Used Shelves
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0">{{
+                    used + "/" + (free + used + full)
+                  }}</span>
                 </div>
                 <div class="col-auto">
-                  <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                  <div
+                    class="icon icon-shape text-white rounded-circle shadow used"
+                  >
                     <i class="ni ni-building"></i>
                   </div>
                 </div>
@@ -37,6 +53,31 @@
             </div>
           </div>
         </div>
+
+        <div class="col-xl-3 col-lg-6">
+          <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h5 class="card-title text-uppercase text-muted mb-0">
+                    Full Shelves
+                  </h5>
+                  <span class="h2 font-weight-bold mb-0">{{
+                    full + "/" + (free + used + full)
+                  }}</span>
+                </div>
+                <div class="col-auto">
+                  <div
+                    class="icon icon-shape bg-danger text-white rounded-circle shadow full"
+                  >
+                    <i class="ni ni-building"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- <div class="col-xl-3 col-lg-6">
           <div class="card card-stats mb-4 mb-xl-0">
             <div class="card-body">
@@ -54,7 +95,7 @@
             </div>
           </div>
         </div> -->
-        <div class="col-xl-3 col-lg-6">
+        <!-- <div class="col-xl-3 col-lg-6">
             <div class="card card-stats mb-4 mb-xl-0">
               <div class="card-body">
                 <div class="row">
@@ -70,7 +111,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
       </div>
     </div>
   </div>
@@ -87,7 +128,40 @@
         </div>
       </div>
       <div class="card-body">
-        <div *ngIf="barChartDataBU.length > 0">
+          <div *ngFor="let unit of unitReport">
+              <strong>{{ unit.unit }}</strong>
+              <div>
+                <div
+                  id='{{ unit.unitId }}'
+                  class="free"
+                  *ngIf="unit.free"
+                  [ngStyle]="{ width: unit.freeDraw }"
+                  (click)="onUnitFreeClick($event)"
+                >
+                  <strong id='{{ unit.unitId }}' (click)="onUnitFreeClick($event)">{{ unit.free }}</strong>
+                </div>
+                <div
+                  class="used"
+                  *ngIf="unit.used"
+                  [ngStyle]="{ width: unit.usedDraw }"
+                  id='{{ unit.unitId }}'
+                  (click)="onUnitUsedClick($event)"
+                >
+                  <strong  id='{{ unit.unitId }}' (click)="onUnitUsedClick($event)">{{ unit.used }}</strong>
+                </div>
+                <div
+                  class="full"
+                  *ngIf="unit.full"
+                  [ngStyle]="{ width: unit.fullDraw }"
+                  id='{{ unit.unitId }}'
+                  (click)="onUnitFullClick($event)"
+                >
+                  <strong id='{{ unit.unitId }}' (click)="onUnitFullClick($event)">{{ unit.full }}</strong>
+                </div>
+              </div>
+              <br />
+            </div>
+        <!-- <div *ngIf="barChartDataBU.length > 0">
             <canvas baseChart
               [datasets]="barChartDataBU"
               [labels]="barChartLabelsBU"
@@ -96,12 +170,14 @@
               [legend]="barChartLegend"
               [chartType]="barChartType">
             </canvas>
-          </div>
+          </div> -->
       </div>
     </div>
   </div>
+
+  <!-- Phan nhom login viet -->
   <!-- Business Unit Table -->
-  <div class="row mt-5">
+  <!-- <div class="row mt-5">
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
@@ -157,11 +233,11 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row mt-5">
-  </div>
-  <hr class="my-4"/>
-<!-- Floor Table -->
+  </div>-->
+
+  <div class="row mt-5"></div>
+  <hr class="my-4" />
+  <!-- Floor Table -->
   <div class="col-xl-12 mb-5 mb-xl-0">
     <div class="card">
       <div class="card-header bg-transparent">
@@ -173,7 +249,40 @@
         </div>
       </div>
       <div class="card-body">
-          <div *ngIf="barChartDataFloor.length > 0">
+        <div *ngFor="let floor of floorReport">
+          <strong>Floor {{ floor.Floor }}</strong>
+          <div>
+            <div
+              id='{{ floor.Floor }}'
+              class="free"
+              *ngIf="floor.Free"
+              [ngStyle]="{ width: floor.Free + '%' }"
+              (click)="onFreeClick($event)"
+            >
+              <strong id='{{ floor.Floor }}' (click)="onFreeClick($event)">{{ floor.Free }}</strong>
+            </div>
+            <div
+              class="used"
+              *ngIf="floor.Used"
+              [ngStyle]="{ width: floor.Used + '%' }"
+              id='{{ floor.Floor }}'
+              (click)="onUsedClick($event)"
+            >
+              <strong  id='{{ floor.Floor }}' (click)="onUsedClick($event)">{{ floor.Used }}</strong>
+            </div>
+            <div
+              class="full"
+              *ngIf="floor.Full"
+              [ngStyle]="{ width: floor.Full + '%' }"
+              id='{{ floor.Floor }}'
+              (click)="onFullClick($event)"
+            >
+              <strong id='{{ floor.Floor }}' (click)="onFullClick($event)">{{ floor.Full }}</strong>
+            </div>
+          </div>
+          <br />
+        </div>
+        <!-- <div *ngIf="barChartDataFloor.length > 0">
             <canvas baseChart
               [datasets]="barChartDataFloor"
               [labels]="barChartLabelsFloor"
@@ -182,11 +291,11 @@
               [legend]="barChartLegend"
               [chartType]="barChartType">
             </canvas>
-          </div>
+          </div> -->
       </div>
     </div>
   </div>
-  <div class="row mt-5">
+  <!-- <div class="row mt-5">
     <div class="col">
       <div class="card shadow">
         <div class="card-header border-0">
@@ -242,13 +351,41 @@
         </div>
       </div>
     </div>
-  </div>
-  <div  style="background-color: blue; width: 30%;" id='ads'>
-      <script>
-        document.getElementById('ads').style.width='50%';
-        document.getElementById('ads').style.backgroundColor='red'
-      </script>
-    afassadfjhasdfkashnolknl
-    </div>
+  </div> -->
 </div>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+      <div style='height: 100%;'>
+        <span class="close" (click)="onCloseModal()">&times;</span>  
+        <div class="shelf-list">
+            <div id="chinh">
+              <div style="height: 100%;">
+                <div id="shelf" *ngFor="let shelf of dataModal">
+                  <div
+                    class="shelfDraw"
+                    [class.free]="shelf.status == 0"
+                    [class.used]="shelf.status == 1"
+                    [class.full]="shelf.status == 2"
+                  >
+                    <input
+                      class="shelf"
+                      type="image"
+                      src="/assets/images/common/shelf.png"
+                      alt="Submit"
+                    />
+                    <span
+                      width="100%"
+                      id="{{ shelf.shelfId }}"
+                      >{{ shelf.shelfId }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+           
+      </div>
+    </div>
+  </div>
