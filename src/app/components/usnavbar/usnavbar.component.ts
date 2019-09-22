@@ -32,11 +32,14 @@ export class UsnavbarComponent implements OnInit {
     }
 
     for(var item = 0; item < this.listTitles.length; item++){
+        if(titlee==='shelfControl'){
+          return 'SHELVES MANAGE'
+        }
         if(this.listTitles[item].path === titlee){
             return this.listTitles[item].title;
         }
     }
-    return 'Profile';
+    return 'Booking';
   }
 
   logout() {

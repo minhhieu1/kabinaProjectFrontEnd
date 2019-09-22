@@ -12,6 +12,6 @@ export class UserProfile{
     ){}
 
     getUserInfo(userId) {
-        return this.http.get(`${environment.apiUrl}/users/${userId}`);
+        return this.http.get(`${environment.api}/usersProfile/${userId}`);
     } 
 }

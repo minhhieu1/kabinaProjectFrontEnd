@@ -12,7 +12,8 @@ export const environment = {
   landingPagePath: '/kabina',
   logo: {
     path: 'assets/images/logos/company_logo.png'
-  }
+  },
+  api:'http://localhost:8080/kabina/api/control'
 };
 
 /*

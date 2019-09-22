@@ -1,0 +1,54 @@
+<div
+  class="header pb-8 pt-5 pt-md-8"
+  style="min-height: 50px; background-image: url(assets/images/common/banner.png); background-size: cover; background-position: center top;"
+></div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow parent">
+        <div style="height: 550px;">
+          <div>
+            <input
+              type="button"
+              class="btn btn-info"
+              value="Manage Booking"
+              routerLinkActive="active"
+              [routerLink]="['/admin/bookingManage/adminBooking']"
+            />
+            <input
+              type="button"
+              class="btn btn-info"
+              value="Manage Edit"
+              routerLinkActive="active"
+              [routerLink]="['/admin/bookingManage/adminEdit']"
+            />
+            <input
+              type="button"
+              class="btn btn-info"
+              value="Manage History"
+              routerLinkActive="active"
+              [routerLink]="['/admin/bookingManage/adminHistory']"
+            />
+            <input
+              type="button"
+              class="btn btn-info"
+              value="Approve New Booking"
+              routerLinkActive="active"
+              [routerLink]="['/admin/bookingManage/adminApproveBooking']"
+            />
+            <input
+              type="button"
+              class="btn btn-info"
+              value="Approve Edit"
+              routerLinkActive="active"
+              [routerLink]="['/admin/bookingManage/adminApproveEdit']"
+            />
+          </div>
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

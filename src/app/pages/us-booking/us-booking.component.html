@@ -1,0 +1,113 @@
+<div id="chinh" *ngIf="!(bookingUnApprove.length > 0)">
+  <form
+    [formGroup]="chooseForm"
+    name="inputDate"
+    (ngSubmit)="onSubmit()"
+    style="text-align: center; margin-block-start: 25px;"
+  >
+    <strong style="margin-left: 2%">Start Day:</strong>
+    <input
+      type="date"
+      id="startDate"
+      name="startDate"
+      min="{{ minMax.min }}"
+      max="{{ minMax.max }}"
+      formControlName="startDate"
+      style="margin-left: 2%"
+    />
+    <strong style="margin-left: 5%">End Day:</strong>
+    <input
+      type="date"
+      id="endDate"
+      name="endDate"
+      min="{{ minMax.min }}"
+      max="{{ minMax.max }}"
+      formControlName="endDate"
+      style="margin-left: 2%"
+    />
+    <input
+      class="btn btn-primary"
+      type="submit"
+      value="Submit"
+      style="margin-left: 5%"
+    />
+    <div
+      class="alert alert-danger"
+      *ngIf="alertDate"
+      style="text-align: center"
+    >
+      Something wrong.Please check Start date and End date. Start date must
+      before than end date and both must in range Today to Friday
+    </div>
+    <hr />
+  </form>
+  <div class="shelf-list ">
+    <div *ngIf="!alertDate">
+      <div *ngFor="let shelf of bookingData">
+        <div
+          class="shelfDraw"
+          [class.free]="shelf.status == '0'"
+          [class.used]="shelf.status == '1'"
+          [class.full]="shelf.status == '2'"
+        >
+          <input
+            id="{{ shelf.shelfId }}"
+            (click)="chooseShelf($event)"
+            class="shelf"
+            type="image"
+            src="/assets/images/common/shelf.png"
+            alt="Submit"
+            width="100%"
+            readonly="readonly"
+          />
+          <span
+            id="{{ shelf.shelfId }}"
+            (click)="chooseShelf($event)"
+            width="100%"
+            >{{ shelf.shelfId }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="bookingUnApprove.length > 0" >
+  <div class="alert alert-warning" style="text-align: center; margin-top: 2%">
+    You have booking waiting for admin accept. Please comeback later!!!
+  </div>
+  <div class='alertUnApprove'>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">BookList Id</th>
+          <th scope="col">UserId</th>
+          <th scope="col">ShelfId</th>
+          <th scope="col">StartDate</th>
+          <th scope="col">EndDate</th>
+          <th scope="col">Expire</th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor="let booklist of bookingUnApprove">
+          <td>{{ booklist.bookingId }}</td>
+          <td>{{ booklist.user.userId }}</td>
+          <td>{{ booklist.shelf.shelfId }}</td>
+          <td>{{ booklist.startDate }}</td>
+          <td>{{ booklist.endDate }}</td>
+          <td>{{ booklist.expire }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- <div
+  class="alert alert-danger"
+  *ngIf="!checkUserBooking && !checkUserWaiting"
+  style="text-align: center"
+>
+  You cannot book more shelf because you already have. Please edit your book or
+  delete it if you want to book a new shelf.
+</div> -->

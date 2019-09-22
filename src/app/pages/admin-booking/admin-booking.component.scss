@@ -1,0 +1,40 @@
+#chinh div.shelfDraw {
+    text-align: center;
+    padding: 1%;
+    margin: 1%;
+    width: 12%;
+    float: left;
+    border-radius: 2%;
+    position: relative;
+  }
+  #chinh div.shelfDraw:hover {
+    background-color: rgb(135, 141, 135);
+  }
+  #chinh .free {
+    background-color: rgb(127, 233, 130);
+    color: green;
+  }
+  #chinh .used {
+    background-color: rgb(255, 251, 0);
+    color: orange;
+  }
+  #chinh .full {
+    background-color: #f1565e;
+    color: red;
+  }
+  #chinh input.shelf {
+    width: 100%;
+  }
+  #chinh img {
+    width: 100px !important;
+  }
+  #chinh span {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  .shelf-list {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 350px;
+  }
+  

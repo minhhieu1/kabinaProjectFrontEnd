@@ -1,10 +1,10 @@
-<div class="header pb-8 pt-5 pt-md-8" style="min-height: 50px; background-image: url(assets/images/common/banner.png); background-size: cover; background-position: center top;">
+<div
+  class="header pb-8 pt-5 pt-md-8"
+  style="min-height: 50px; background-image: url(assets/images/common/banner.png); background-size: cover; background-position: center top;"
+>
   <div class="container-fluid">
     <div class="header-body">
-      
       <div class="row margintop">
-
-            <!-- Form -->
         <form [formGroup]="searchForm" (ngSubmit) = "search()" class="navbar-search navbar-search-dark form-inline ml-3 d-none d-md-flex">
           <div class="form-group mb-0" [ngClass]="{ 'focused': focus === true }">
             <div class="input-group input-group-alternative">
@@ -16,7 +16,6 @@
             </div>
           </div>
         </form>
-
       </div>
     </div>
   </div>
@@ -27,40 +26,98 @@
   <div class="row">
     <div class="col">
       <div class="card shadow">
-        <!-- <div class="card-header border-0">
-          <h3 class="mb-0">Card tables</h3>
-        </div> -->
-
         <div class="shelf-list">
-           
-              <div *ngFor="let shelf of shelves" class="col-2-custom  shelf-wrapper">
-                  <button class="shelf" [ngClass]="{'shelf-occupied': shelf.user_shelf != null}" (click) = onShelfClick(shelf)>{{shelf.positionNumber}}</button>
+          <div id="chinh">
+            <div style="height: 620px;">
+              <div id="shelf" *ngFor="let shelf of shelfStatusForDraw">
+                <div
+                  class="shelfDraw"
+                  [class.free]="shelf.value == 0"
+                  [class.used]="shelf.value == 1"
+                  [class.full]="shelf.value == 2"
+                >
+                  <input
+                    class="shelf"
+                    type="image"
+                    src="/assets/images/common/shelf.png"
+                    alt="Submit"
+                    id="{{ shelf.shelfId }}"
+                    (click)="onShelfClick($event)"
+                  />
+                  <span
+                    width="100%"
+                    id="{{ shelf.shelfId }}"
+                    (click)="onShelfClick($event)"
+                    >{{ shelf.shelfId }}</span
+                  >
+                </div>
               </div>
-        
+            </div>
+          </div>
         </div>
       </div>
-    
     </div>
   </div>
- 
 </div>
 
-<div id="shelf-modal">
-  <div  *ngIf="shelfObjectClicked">
-    <h2>Shelf {{shelfObjectClicked.positionNumber}} - Floor {{shelfObjectClicked.floor}}</h2>
-
-    <div *ngIf="!shelfObjectClicked.user_shelf">
-        <h1>Available ! </h1>
-        <button class="btn btn-primary">Booking</button> 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  Modal content
+  <div class="modal-content" style="height: 50% !important;">
+    <div style='height: 100%;'>
+      <span class="close" (click)="onCloseModal()">&times;</span>  
+      <div
+        class=" trai"
+        [class.free]="shelf.status == 0"
+        [class.used]="shelf.status == 1"
+        [class.full]="shelf.status == 2"
+      >
+        <input
+          class="shelf"
+          type="image"
+          src="/assets/images/common/shelf.png"
+          style="padding: 10px"
+          alt="Submit"
+          width="100%"
+          height="90%"
+        />
+        <span width="100%" height="10%" style="text-align: center; padding-bottom: 10px"><strong>{{shelf.shelfId}}</strong></span>
+      </div>
+      <div class="phai">
+        <table class="table table-hover" style="text-align: center">
+          <thead>
+            <tr>
+              <th style="text-align: center">Monday</th>
+              <th style="text-align: center">Tuesday</th>
+              <th style="text-align: center">Wednesday</th>
+              <th style="text-align: center">Thusday</th>
+              <th style="text-align: center">Friday</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>{{ shelf.detail[0] }}</strong>
+              </td>
+              <td>
+                <strong>{{ shelf.detail[1] }}</strong>
+              </td>
+              <td>
+                <strong>{{ shelf.detail[2] }}</strong>
+              </td>
+              <td>
+                <strong>{{ shelf.detail[3] }}</strong>
+              </td>
+              <td>
+                <strong>{{ shelf.detail[4] }}</strong>
+              </td>
+            </tr>
+            <tr></tr>
+          </tbody>
+        </table>
+      </div>
+         
     </div>
-      
-    <div *ngIf="shelfObjectClicked.user_shelf">
-      <h1>Unavailable ! </h1> 
-      
-    </div>
-      <button (click)="onCloseModal();" class="btn-close">Close</button>
-
-    
+    <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
   </div>
-
 </div>

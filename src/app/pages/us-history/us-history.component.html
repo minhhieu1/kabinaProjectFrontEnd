@@ -1,0 +1,31 @@
+<div class='history'>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">BookList Id</th>
+        <th scope="col">UserId</th>
+        <th scope="col">ShelfId</th>
+        <th scope="col">StartDate</th>
+        <th scope="col">EndDate</th>
+        <th scope="col">Expire</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let booklist of bookingHistory" >
+        <td>{{ booklist.bookingId}}</td>
+        <td>{{ booklist.user.userId}}</td>
+        <td>{{ booklist.shelf.shelfId}}</td>
+        <td>{{ booklist.startDate}}</td>
+        <td>{{ booklist.endDate}}</td>
+        <td>{{ booklist.expire}}</td>
+      </tr>
+      <!-- <tr>
+          <td colspan="6"><div class="text-center">
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div></td>
+      </tr> -->
+    </tbody>
+  
+  </table>
+</div>
+

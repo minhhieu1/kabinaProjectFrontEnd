@@ -8,43 +8,10 @@ $red: #EA1E30;
 .shelf-list{
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 463px;
+    height: 500px;
 }
 .shelf-wrapper{
     margin: 10px 0px;
-}
-
-.shelf{
-    width: 100%;
-    cursor: pointer;
-    padding: 18px 12px;
-    color: #212529;
-    background-color: $white;
-    font-weight: 600;
-    text-align: center;
-    border: 2px solid $red;
-    border-radius: 2px;
-    &:hover{
-        background-color: #00C9FF;
-        border-color: #00C9FF;
-    }
-}
-
-.shelf-occupied{
-   background-color: $red;
-}
-
-.shelf-owner{
-    background-color: #00C9FF;
-    border-color: #00C9FF;
-}
-// .shelf-waiting{
-//   background-color: $green-shelf-watting;
-//   border-color: $green-shelf-watting;
-// }
-.shelf-click{
-    background-color: $green;
-    border-color: $green;
 }
 
 .col-2-custom {
@@ -92,3 +59,120 @@ $red: #EA1E30;
         }
     }   
 }
+
+
+#chinh div.shelfDraw{
+    text-align: center;
+    padding: 1%;
+    margin: 1%;
+    width : 12%;
+    float: left;
+    border-radius: 2%;
+    position: relative;
+  }
+  #chinh div.shelfDraw:hover{
+    background-color: rgb(135, 141, 135);
+  }
+  #chinh  .free {
+    background-color:  rgb(127, 233, 130);
+    color: green;
+  }
+  #chinh .used {
+    background-color:  rgb(255, 251, 0);
+    color:  orange;
+  }
+  #chinh .full {
+    background-color: #f1565e;
+    color: red;
+  }
+  #chinh input.shelf{
+    width:100%;
+  }
+  #chinh img{
+    width:100px !important;
+  }
+  #chinh span{
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+
+div.modalShow{
+    display:block
+  }
+  
+  div.modalHide{
+    display:none
+  }
+  
+  /* Modal Content/Box */
+  div.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  div.modal {
+    display: none; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto auto !important;
+    // padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    height: 60% !important;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right ;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .trai{
+    float: left;
+    width: 20%;
+    text-align: center;
+    height: 100%
+  }
+  
+  .phai {
+    float: right;
+    width: 80%;
+    align: center
+  }
+  .free {
+    background-color:  rgb(127, 233, 130);
+    color: green;
+  }
+  .used {
+    background-color:  rgb(255, 251, 0);
+    color:  orange;
+  }
+  .full {
+    background-color: #f1565e;
+    color: red;
+  }
+  

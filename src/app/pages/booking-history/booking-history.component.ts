@@ -17,7 +17,7 @@ export class BookingHistoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.bookingService.getBookingList(this.currentUser.id).subscribe((bookings : any[])=>{ 
+    this.bookingService.getBookingList(this.currentUser.userId).subscribe((bookings : any[])=>{ 
         this.datas = bookings;
         console.log(bookings);
     });

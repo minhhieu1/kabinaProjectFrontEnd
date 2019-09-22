@@ -1,0 +1,73 @@
+<div id="chinh">
+  <form
+    [formGroup]="chooseForm"
+    name="inputDate"
+    (ngSubmit)="onSubmit()"
+    style="text-align: center; margin-block-start: 25px;"
+  >
+    <strong style="margin-left: 2%">Start Day:</strong>
+    <input
+      type="date"
+      id="startDate"
+      name="startDate"
+      min="{{ minMax.min }}"
+      max="{{ minMax.max }}"
+      formControlName="startDate"
+      style="margin-left: 2%"
+    />
+    <strong style="margin-left: 5%">End Day:</strong>
+    <input
+      type="date"
+      id="endDate"
+      name="endDate"
+      min="{{ minMax.min }}"
+      max="{{ minMax.max }}"
+      formControlName="endDate"
+      style="margin-left: 2%"
+    />
+    <input
+      class="btn btn-primary"
+      type="submit"
+      value="Submit"
+      style="margin-left: 5%"
+    />
+    <div
+      class="alert alert-danger"
+      *ngIf="alertDate"
+      style="text-align: center"
+    >
+      Something wrong.Please check Start date and End date. Start date must
+      before than end date and both must in range Today to Friday
+    </div>
+    <hr />
+  </form>
+  <div class="shelf-list ">
+    <div *ngIf="!alertDate">
+      <div *ngFor="let shelf of bookingData">
+        <div
+          class="shelfDraw"
+          [class.free]="shelf.status == '0'"
+          [class.used]="shelf.status == '1'"
+          [class.full]="shelf.status == '2'"
+        >
+          <input
+            id="{{ shelf.shelfId }}"
+            (click)="chooseShelf($event)"
+            class="shelf"
+            type="image"
+            src="/assets/images/common/shelf.png"
+            alt="Submit"
+            width="100%"
+            readonly="readonly"
+          />
+          <span
+            id="{{ shelf.shelfId }}"
+            (click)="chooseShelf($event)"
+            width="100%"
+            >{{ shelf.shelfId }}</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

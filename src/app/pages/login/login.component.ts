@@ -58,10 +58,11 @@ export class LoginComponent implements OnInit, OnDestroy {
                     this.router.navigate([this.returnUrl]);
                   }
                   var uinfor = JSON.parse(localStorage.getItem("currentUser"));
-                  if(uinfor.role === 'Admin'){
+                  
+                  if(uinfor.role.roleName === 'Admin'){
                     this.router.navigate(['admin']);
                   }
-                  if(uinfor.role === 'User'){
+                  if(uinfor.role.roleName === 'User'){
                     this.router.navigate(['user']);
                   }
               },

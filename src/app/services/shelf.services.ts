@@ -5,16 +5,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment'
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ShelfServices {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getUser(userId: number){ 
-    let url = `${environment.apiUrl}/users/${userId}`;
-    return this.http.get(url);
-  }
+  // getUser(userId: number){ 
+  //   let url = `${environment.api}/users/${userId}`;
+  //   return this.http.get(url);
+  // }
 
-  getShelfList(unitId){
-    return this.http.get(`${environment.apiUrl}/units/${unitId}/shelves`);
+  getShelfList(unitId, role) {
+    if(role=='Admin'){
+      return this.http.get(`${environment.api}/getMapShelfAdmin`)
+    }
+    else {
+      return this.http.get(`${environment.api}/getMapShelfFromUnit?unitId=` + unitId)
+    }
+    
   }
 }

@@ -1,3 +1,4 @@
+import { UserBookingComponent } from './../../pages/user-booking/user-booking.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -25,7 +26,11 @@ import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
   declarations: [
     UserProfileComponent,
     TablesComponent,
-    BookingHistoryComponent
+    BookingHistoryComponent,
+    UserBookingComponent
+  ],
+  exports:[
+    TablesComponent
   ]
 })
 

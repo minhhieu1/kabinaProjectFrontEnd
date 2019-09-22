@@ -25,11 +25,9 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
 
-    this.UserObject = this._userProfile.getUserInfo(this.currentUser.id).subscribe(
+    this.UserObject = this._userProfile.getUserInfo(this.currentUser.userId).subscribe(
       data => {
-       
         this.UserObject = data;
-        console.log(this.UserObject)
       },
       err => {
         alert(err);
