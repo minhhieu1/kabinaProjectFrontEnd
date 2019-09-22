@@ -17,7 +17,14 @@ export class AdminUserlistComponent implements OnInit {
     {"roleId":2,"roleName":"User"}
   ]
   businesses =[
-    {"unitId":1,"unitName":"Healthcare","leaderId":1}
+    {"unitId":1,"unitName":"Healthcare","leaderId":1},
+    {"unitId":2,"unitName":"SAP","leaderId":2},
+    {"unitId":3,"unitName":"Core Delivery","leaderId":3},
+    {"unitId":4,"unitName":"Insurance","leaderId":4},
+    {"unitId":5,"unitName":"Core Delivery","leaderId":5},
+    {"unitId":6,"unitName":"Core Delivery","leaderId":6},
+    {"unitId":7,"unitName":"Core Delivery","leaderId":7},
+    {"unitId":8,"unitName":"JVDC","leaderId":8},
   ]
   public hideBtn = true;
   public receivedData:any;
