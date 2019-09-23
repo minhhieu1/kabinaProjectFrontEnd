@@ -31,11 +31,19 @@ export class UserService {
      return this._restService.patchByUrl(url,user);
    }
    public getBookingTempList() : Observable<Object> {
-    let url = `${environment.kabinaAPI}` + '/control/bookingtemp';
+    let url = `${environment.kabinaAPI}` + '/control/bookingtemp/new';
+    return this.http.get(url);
+  }
+  public getBookingTempListEdit() : Observable<Object> {
+    let url = `${environment.kabinaAPI}` + '/control/bookingtemp/edit';
     return this.http.get(url);
   }
   public approveBooking(booking:any) {
-    let url = `${environment.kabinaAPI}` + '/control/approve/' + booking.bookingId;
+    let url = `${environment.kabinaAPI}` + '/control/approve/' + booking.bookingId + "/false";
+    return this._restService.postByUrl(url,booking);
+  }
+  public approveBookingEdit(booking:any) {
+    let url = `${environment.kabinaAPI}` + '/control/approve/' + booking.bookingId + "/true";
     return this._restService.postByUrl(url,booking);
   }
   public rejectBooking(booking:any) {
