@@ -40,6 +40,7 @@ export class UserService {
   }
   public rejectBooking(booking:any) {
     let url = `${environment.kabinaAPI}` + '/control/reject/' + booking.bookingId;
+    console.log(url)
     return this._restService.deleteByUrl(url);
   }
 }

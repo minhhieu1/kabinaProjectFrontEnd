@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from './../../services/user.service';
+import { BookingService } from './../../services/booking.service';
 
 @Component({
   selector: 'app-admin-approve-booking',
@@ -8,7 +9,7 @@ import { UserService } from './../../services/user.service';
 })
 export class AdminApproveBookingComponent implements OnInit {
   public bookingTempList:any;
-  constructor(private _userService: UserService) { }
+  constructor(private _userService: UserService, private bookingService: BookingService) { }
   config: any;
   public configModal: any;
   public maxSize: number = 7;
@@ -25,6 +26,13 @@ export class AdminApproveBookingComponent implements OnInit {
   getBookingTemps() {
     this._userService.getBookingTempList().subscribe(
       data => {
+        console.log(data)
+        for (var key in data){
+          var start=new Date(data[key]['startDate'])
+          var end=new Date(data[key]['endDate'])
+          data[key]['startDate']= this.bookingService.formatDateToString(start)
+          data[key]['endDate']= this.bookingService.formatDateToString(end)
+        }
         this.bookingTempList = data;
       },
       err => {
