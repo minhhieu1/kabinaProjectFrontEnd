@@ -1,4 +1,4 @@
-export class User {
+export class UserModel {
     userId: number;
     userName: string;
     password: string;
@@ -15,6 +15,5 @@ export class User {
         unitName: string,
         leaderId: number
     };
-    jwttoken: string;
-
+    token?: string;
 }
