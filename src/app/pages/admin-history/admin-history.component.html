@@ -1,0 +1,34 @@
+<div style="overflow-y: auto;width: 100%;height: 93%;" >
+    <table class="table table-hover">
+        <thead>
+            <tr class="thead-light">
+            <th class="th-sm" id="bookingId" (click)="sort($event)" >BookList Id</th>
+            <th class="th-sm" id="userId" (click)="sort($event)">UserId</th>
+            <th class="th-sm" id="shelfId" (click)="sort($event)">ShelfId</th>
+            <th class="th-sm" id="startDate" (click)="sort($event)">StartDate</th>
+            <th class="th-sm" id="endDate" (click)="sort($event)">EndDate</th>
+            <th class="th-sm" id="expire" (click)="sort($event)">Expire</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let booking of bookingHistoryDraw" >
+            <td>{{ booking.bookingId}}</td>
+            <td>{{ booking.user.userId}}</td>
+            <td>{{ booking.shelf.shelfId}}</td>
+            <td>{{ booking.startDate}}</td>
+            <td>{{ booking.endDate}}</td>
+            <td>{{ booking.expire}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr class="thead-light">
+                <th><input type="text" [(ngModel)]="fillterBookingId" (input)="fillter()" placeholder="BookList Id" id="bookingId" ></th>
+                <th><input type="text" [(ngModel)]="fillterUserId" (input)="fillter()" placeholder="UserId" id="userId" ></th>
+                <th><input type="text" [(ngModel)]="fillterShelfId" (input)="fillter()" placeholder="ShelfId" id="shelfId" ></th>
+                <th><input type="text" [(ngModel)]="fillterStartDate" (input)="fillter()" placeholder="StartDate" id="startDate" ></th>
+                <th><input type="text" [(ngModel)]="fillterEndDate" (input)="fillter()" placeholder="EndDate" id="endDate" ></th>
+                <th><input type="text" [(ngModel)]="fillterExpire" (input)="fillter()" placeholder="Expire" id="expire" ></th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

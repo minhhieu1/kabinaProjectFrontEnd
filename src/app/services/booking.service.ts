@@ -137,6 +137,30 @@ export class BookingService {
     )
     return bookingHistory;
   }
+
+
+  findUserBookingEdit(userId) {
+    console.log('Find booking edit');
+    let bookingEdit = [];
+    let params = new HttpParams()
+      .set('userId', userId);
+    this.http.get(`${environment.api}/users/BookingEdit?` + params).subscribe(
+      data => {
+        for (var key in data) {
+          var start = new Date(data[key]['startDate']);
+          var end = new Date(data[key]['endDate'])
+          data[key]['startDate'] = this.formatDateToString(start);
+          data[key]['endDate'] = this.formatDateToString(end);
+          bookingEdit.push(data[key])
+        }
+      },
+      err => {
+        alert(err)
+      }
+    )
+    return bookingEdit;
+  }
+
   getShelfAdmin(startDate, endDate) {
     console.log('Get list shelf free admin')
     let alvailable = [];

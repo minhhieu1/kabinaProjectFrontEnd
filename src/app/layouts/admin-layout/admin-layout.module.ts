@@ -16,6 +16,7 @@ import { TablesComponent } from 'src/app/pages/tables/tables.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ReadXlsxComponent } from '../../pages/read-xlsx/read-xlsx.component';
 
+
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({

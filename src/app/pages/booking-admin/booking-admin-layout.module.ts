@@ -12,7 +12,6 @@ import { NgbModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { AdminBookingComponent } from '../admin-booking/admin-booking.component';
 
 
-
 @NgModule({
   imports: [
     CommonModule,

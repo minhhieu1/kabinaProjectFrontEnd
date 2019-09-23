@@ -1,3 +1,83 @@
-<p>
-  us-edit works!
-</p>
+<div style="overflow-y: auto;width: 100%;height: 96%;" >
+    <table class="table table-hover">
+        <thead>
+            <tr class="thead-light">
+            <th class="th-sm" id="bookingId" (click)="sort($event)" >BookList Id</th>
+            <th class="th-sm" id="shelfId" (click)="sort($event)">ShelfId</th>
+            <th class="th-sm" id="startDate" (click)="sort($event)">StartDate</th>
+            <th class="th-sm" id="endDate" (click)="sort($event)">EndDate</th>
+            <th class="th-sm">Edit</th>
+            <th class="th-sm">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let booking of bookingEditDraw" >
+            <td>{{ booking.bookingId}}</td>
+            <td>{{ booking.shelf.shelfId}}</td>
+            <td>{{ booking.startDate}}</td>
+            <td>{{ booking.endDate}}</td>
+            <td>
+                <img src="assets/img/icons/edit.png" id="{{booking.bookingId}}" (click)='changmyModalData($event)' >
+              </td>
+              <td><img id="{{ booking.bookingId}}" src="assets/img/icons/delete.png"  (click)="deleteBookingEdit($event)" ></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr class="thead-light">
+                <th><input type="text" [(ngModel)]="fillterBookingId" (input)="fillter()" placeholder="BookList Id" id="bookingId" ></th>
+                <th><input type="text" [(ngModel)]="fillterShelfId" (input)="fillter()" placeholder="ShelfId" id="shelfId" ></th>
+                <th><input type="text" [(ngModel)]="fillterStartDate" (input)="fillter()" placeholder="StartDate" id="startDate" ></th>
+                <th><input type="text" [(ngModel)]="fillterEndDate" (input)="fillter()" placeholder="EndDate" id="endDate" ></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal" [class.hide]='!visibleEdit' [class.show]='visibleEdit'>
+
+  <!-- Modal content -->
+  <div class="modal-content">
+
+
+    <div style="text-align: center">Edit
+      <span (click)='toggle()' class="close">&times;</span>
+    </div>
+
+    <hr>
+
+    <div style="text-align: center">
+      Start Date:
+      <input type="date" id="startDate" name="startDate" [(ngModel)]="booklistUpdate['startDate']"
+      min="{{ minMax.min }}"max="{{ minMax.max }}" [ngClass]="{uneditable: !editStartDate}" />
+      End Date:
+      <input type="date" id="endDate" name="endDate" [(ngModel)]="booklistUpdate['endDate']" min="{{ minMax.min }}"max="{{ minMax.max }}"  />
+    </div>
+
+    <hr>
+
+    <div class="alert alert-danger" *ngIf='alertDate'>
+      Start day must less than end day.
+    </div>
+
+    <div class="alert alert-danger" *ngIf='alertEndDate'>
+      Cannot update this book because this shelf alrealdy book by another user on your date range,
+      You should limit End day or book a new shelf.
+    </div>
+
+
+
+    <div style="text-align: right">
+      <button type="submit" class="btn btn-primary" (click)="updateBookingEdit()">Accept</button>
+      <button (click)='toggle()' type="button" style="margin-left: 5px" class="btn btn-danger">Close</button>
+    </div>
+
+
+  </div>
+  
+</div>
