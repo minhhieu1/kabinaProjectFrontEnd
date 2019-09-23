@@ -20,6 +20,10 @@ import { ComponentsModule } from './components/components.module';
 import { ChartsModule } from 'ng2-charts';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AgGridModule } from 'ag-grid-angular';
+import { RestService } from "./services/rest.service";
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { ReadXlsxComponent } from './pages/read-xlsx/read-xlsx.component';
 
 @NgModule({
   imports: [
@@ -35,6 +39,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ChartsModule,
     KabinaModule,
     NgxPaginationModule,
+    AgGridModule.withComponents([]),
+    ModalModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -45,7 +51,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    RestService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,91 @@
-<p>
-  admin-approve-booking works!
-</p>
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 50px; background-image: url(assets/images/common/banner.png); background-size: cover; background-position: center top;">
+  <!-- Mask -->
+  <!-- <span class="mask bg-gradient-danger opacity-8"></span> -->
+  <!-- Header container -->
+  <!-- <div class="container-fluid d-flex align-items-center">
+    <div class="row">
+      <div class="col-lg-7 col-md-10">
+        <h1 class="display-2 text-white">Hello Jesse</h1>
+        <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
+        <a href="#!" class="btn btn-info">Edit profile</a>
+      </div>
+    </div>
+  </div> -->
+</div>
+<div class="container-fluid mt--7">
+   <!-- Table -->
+   <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header border-0">
+          <h2>Booking List</h2>
+          
+        </div>
+        <div class="table-responsive">
+          <table class="table align-items-center table-flush">
+            <thead *ngIf="bookingTempList" class="thead-light">
+              <tr>
+                <th scope="col">Booking Id</th>
+                <th scope="col">User Id</th>
+                <th scope="col">User Short name</th>
+                <th scope="col">Business</th>
+                <th scope="col">Shelf Id</th>
+                <th scope="col">Floor</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="bookingTempList">
+              <tr *ngFor="let booking of bookingTempList" >
+                <th scope="row">
+                  {{booking?.bookingId}}
+                </th>
+                <td>
+                    {{booking?.user?.userId}}
+                </td>
+                <td>
+                  {{booking?.user?.shortName}}
+              </td>
+                <td>
+                  {{booking?.user?.business?.unitName}}
+              </td>
+                <td>
+                  {{booking?.shelf?.shelfId}}
+              </td>
+              <td>
+                {{booking?.shelf?.floor?.floor}}
+              </td>
+              <td>
+                {{booking?.startDate}}
+              </td>
+                <td>
+                  {{booking?.endDate}}
+                </td>
+                <td class="text-right">
+                  <div ngbDropdown placement="bottom-right">
+                    <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
+                      <i class="fas fa-ellipsis-v"></i>
+                    </a>
+                    <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                      <a class="dropdown-item" (click) = "approve(booking)">Approve</a>
+                      <a class="dropdown-item" (click) = "reject(booking)">Reject</a>
+                    </div>
+                  </div>
+                  
+                </td>
+              </tr>
+             
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer py-4">
+          <nav aria-label="...">
+            </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

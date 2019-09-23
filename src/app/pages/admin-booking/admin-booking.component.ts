@@ -44,10 +44,27 @@ export class AdminBookingComponent implements OnInit {
     var id = event.target.id;
     var retVal = confirm("Do you want book the sheld with id " + event.target.id + " from " + this.chooseForm.value.startDate + " to " + this.chooseForm.value.endDate + "?");
     if (retVal === true) {
-      var i=this.BookingService.sendBookingRequestAdmin(this.currentUser.userId, id, this.chooseForm.value.startDate, this.chooseForm.value.endDate)
-      this.bookingData=this.bookingData.filter(booking=>{
-        return booking.shelfId!=id;
+      this.BookingService.sendBookingRequestAdmin(this.currentUser.userId, id, this.chooseForm.value.startDate, this.chooseForm.value.endDate)
+      .toPromise()
+      .then(function (response) {// success is deprecated, use then instead
+        if (response == 1) {
+          alert("Yay. Success  :))))))");
+        }else{
+          alert("Something wrong. Please try again :(((((");
+        }
+        return response;
       })
+      .then((response)=>{
+        if (response == 1) {
+          this.bookingData=this.bookingData.filter(booking=>{
+            return booking.shelfId!=id;
+          })
+        }
+      })
+      .catch(function (error) {   // use catch instead of error
+        alert("Something wrong. Please try again :(((((");
+      })
+      
     } else {
       console.log("Cancel booking");
     }

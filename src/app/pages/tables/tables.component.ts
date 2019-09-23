@@ -75,7 +75,7 @@ export class TablesComponent implements OnInit {
     this.shelf=this.shelfDetail[event.target.id]
     console.log(this.shelf)
     var shelfModal= document.getElementById("myModal");
-    shelfModal.style.display = "block";
+    shelfModal.style.display = "flex";
   }
   onCloseModal(){
     var shelfModal= document.getElementById("myModal");

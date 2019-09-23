@@ -193,18 +193,8 @@ export class BookingService {
       .set('shelfId', shelfId)
       .set('startDate', startDate)
       .set('endDate', endDate);
-    this.http.post(`${environment.api}/admin/requesebooking`, (params))
-      .toPromise()
-      .then(function (response) {// success is deprecated, use then instead
-        if (response == 1) {
-          alert("Yay. Success  :))))))");
-        }else{
-          alert("Something wrong. Please try again :(((((");
-        }
-      })
-      .catch(function (error) {   // use catch instead of error
-        alert("Something wrong. Please try again :(((((");
-      })
+    return this.http.post(`${environment.api}/admin/requesebooking`, (params));
+      
   }
 }
 
