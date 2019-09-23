@@ -32,13 +32,15 @@ export class NavbarComponent implements OnInit {
         //titlee = titlee.slice( 1 );
         titlee = titlee.substr(titlee.lastIndexOf('/') + 1);
     }
-
+    if(titlee==='available-shelves'){
+      return 'SHELVES MANAGE'
+    }
     for(var item = 0; item < this.listTitles.length; item++){
         if(this.listTitles[item].path === titlee){
             return this.listTitles[item].title;
         }
     }
-    return 'Dashboard';
+    return 'Booking';
   }
 
   logout() {
