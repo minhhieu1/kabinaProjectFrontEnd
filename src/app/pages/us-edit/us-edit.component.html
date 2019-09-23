@@ -65,6 +65,10 @@
       Start day must less than end day.
     </div>
 
+    <div class="alert alert-danger" *ngIf='alertRange'>
+      You already book shelf in the range date. Please adjust your range. You cannot book 2 shelf in 1 day
+    </div> 
+
     <div class="alert alert-danger" *ngIf='alertEndDate'>
       Cannot update this book because this shelf alrealdy book by another user on your date range,
       You should limit End day or book a new shelf.

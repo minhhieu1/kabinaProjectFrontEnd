@@ -49,6 +49,14 @@ export class BookingUpdateService {
     return this.http.post(this.baseUrl + 'getBookingByShelfId',formData);
   }
 
+  getBookingByUserId(userId:string,bookingId:string) {
+
+    let formData: FormData = new FormData(); 
+    formData.append('bookingId', bookingId); 
+    formData.append('userId', userId); 
+    return this.http.post(this.baseUrl + 'getBookingByUserId',formData);
+  }
+
   insertBookingTemp(bookingId:string,userId:string,shelfId:string,startDate:string,endDate:string) {
 
 
@@ -75,4 +83,5 @@ export class BookingUpdateService {
 
       return this.http.post(this.baseUrl + 'updateBooking',formData);
   }
+  
 }

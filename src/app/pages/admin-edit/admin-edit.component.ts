@@ -17,6 +17,7 @@ export class AdminEditComponent implements OnInit {
   alertDate: boolean = false;
   alertEndDate: boolean = false;
   editStartDate: boolean = false;
+  alertRange: boolean = false;
   booklistUpdate = {};
   visibleEdit: boolean;
 
@@ -206,8 +207,7 @@ export class AdminEditComponent implements OnInit {
     
     changmyModalData(event){
 
-      this.alertEndDate=false;
-      this.alertDate=false;
+      this.deleteAlert();
 
       let id = event.target.id;
       
@@ -241,10 +241,17 @@ export class AdminEditComponent implements OnInit {
     
   }
 
-  updateBookingEdit(){
 
+  deleteAlert(){
     this.alertEndDate=false;
     this.alertDate=false;
+    this.alertRange = false;
+  }
+
+
+  updateBookingEdit(){
+
+    this.deleteAlert();
 
     console.log(this.bookingEdit);
 
@@ -267,7 +274,7 @@ export class AdminEditComponent implements OnInit {
         }
       ).then(()=>{
 
-        for(var i=start-1; i<=end-1; i++){
+        for(let i=start-1; i<=end-1; i++){
           if(map[i]!=this.booklistUpdate['user']['userId']&&map[i]!=''){
             return false;
           }
@@ -279,24 +286,57 @@ export class AdminEditComponent implements OnInit {
         if(!validate){
           this.alertEndDate=true;
         } else{
-          if (confirm("Are you sure ?")) {
 
-           this.bookingUpdateService.updateBooking(
-             this.booklistUpdate['bookingId'],
-             this.booklistUpdate['startDate'],
-             this.booklistUpdate['endDate']
-             )
-           .subscribe((data) => {
-             if(data){
-               alert('Suscess!')
-               this.getAllBookingEdit();
-               this.toggle()
-             } else {
-               alert('Error!')
-             }
-           })
+          var mapUser = []
+          this.bookingUpdateService.getBookingByUserId(this.booklistUpdate['user']['userId'],this.booklistUpdate['bookingId'])
+          .toPromise().then(
+            (data) => {
+    
+              mapUser=data[this.booklistUpdate['user']['userId']];
+              console.log(mapUser)
+            }
+          ).then(()=>{
 
-          }
+            for(let i=start-1; i<=end-1; i++){
+              if(mapUser[i]==this.booklistUpdate['user']['userId']){
+                return false;
+              }
+            }
+            return true;
+
+          })
+          .then((validate)=>{
+
+
+            if(!validate){
+              this.alertRange=true;
+            } else{
+
+              if (confirm("Are you sure ?")) {
+
+                this.bookingUpdateService.updateBooking(
+                  this.booklistUpdate['bookingId'],
+                  this.booklistUpdate['startDate'],
+                  this.booklistUpdate['endDate']
+                  )
+                .subscribe((data) => {
+                  if(data){
+                    alert('Suscess!')
+                    this.getAllBookingEdit();
+                    this.toggle()
+                  } else {
+                    alert('Error!')
+                  }
+                })
+    
+              }
+            }
+
+
+          })
+
+
+          
         }
 
 

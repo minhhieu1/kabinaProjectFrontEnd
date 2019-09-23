@@ -20,6 +20,7 @@ export class UsEditComponent implements OnInit {
   alertDate: boolean = false;
   alertEndDate: boolean = false;
   editStartDate: boolean = false;
+  alertRange: boolean = false;
   bookingUpdate = {};
   visibleEdit: boolean;
 
@@ -52,6 +53,14 @@ export class UsEditComponent implements OnInit {
     this.getStarAndEnd();
    
   }
+
+
+  deleteAlert(){
+    this.alertEndDate=false;
+    this.alertDate=false;
+    this.alertRange = false;
+  }
+
 
   getStarAndEnd() {
     let obj = this.BookingService.getStartAndEnd();
@@ -174,8 +183,7 @@ export class UsEditComponent implements OnInit {
 
     changmyModalData(event){
 
-      this.alertEndDate=false;
-      this.alertDate=false;
+      this.deleteAlert();
 
       let id = event.target.id;
       
@@ -211,8 +219,7 @@ export class UsEditComponent implements OnInit {
 
     updateBookingEdit(){
 
-      this.alertEndDate=false;
-      this.alertDate=false;
+      this.deleteAlert();
 
       console.log(this.bookingEdit);
 
@@ -247,34 +254,62 @@ export class UsEditComponent implements OnInit {
           if(!validate){
             this.alertEndDate=true;
           } else{
-            if (confirm("Are you sure ?")) {
-  
-             this.bookingUpdateService.insertBookingTemp(
-               this.bookingUpdate['bookingId'],
-               this.bookingUpdate['user']['userId'],
-               this.bookingUpdate['shelf']['shelfId'],
-               this.bookingUpdate['startDate'],
-               this.bookingUpdate['endDate'],
-               )
-             .subscribe((data) => {
-               if(data){
-                 alert('Suscess!')
-                 this.getAllBookingEdit();
-                 this.toggle()
-               } else {
-                 alert('Error!')
-               }
-             })
-  
-            }
-          }
-  
-  
-        })
-
-      }
-
+            
+            var mapUser = []
+            this.bookingUpdateService.getBookingByUserId(this.bookingUpdate['user']['userId'],this.bookingUpdate['bookingId'])
+            .toPromise().then(
+              (data) => {
       
+                mapUser=data[this.bookingUpdate['user']['userId']];
+                console.log(mapUser)
+              }
+            ).then(()=>{
+  
+              for(let i=start-1; i<=end-1; i++){
+                if(mapUser[i]==this.bookingUpdate['user']['userId']){
+                  return false;
+                }
+              }
+              return true;
+  
+            })
+            .then((validate)=>{
+  
+  
+              if(!validate){
+                this.alertRange=true;
+              } else{
+  
+                if (confirm("Are you sure ?")) {
+  
+                  this.bookingUpdateService.insertBookingTemp(
+                    this.bookingUpdate['bookingId'],
+                    this.bookingUpdate['user']['userId'],
+                    this.bookingUpdate['shelf']['shelfId'],
+                    this.bookingUpdate['startDate'],
+                    this.bookingUpdate['endDate']
+                    
+                    )
+                  .subscribe((data) => {
+                    if(data){
+                      alert('Suscess!')
+                      this.toggle()
+                    } else {
+                      alert('Error!')
+                    }
+                  })
+      
+                }
+              }
+  
+  
+            })
+          }
+        })
+  
+      }
     }
-
-}
+  
+  
+  }
+  
