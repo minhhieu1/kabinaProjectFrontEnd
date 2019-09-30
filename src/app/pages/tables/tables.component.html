@@ -29,7 +29,7 @@
         <div class="shelf-list">
           <div id="chinh">
             <div style="height: 620px;">
-              <div id="shelf" *ngFor="let shelf of shelfStatusForDraw">
+              <ng-container  id="shelf" *ngFor="let shelf of shelfStatusForDraw">
                 <div
                   class="shelfDraw"
                   [class.free]="shelf.value == 0"
@@ -51,7 +51,7 @@
                     >{{ shelf.shelfId }}</span
                   >
                 </div>
-              </div>
+              </ng-container >
             </div>
           </div>
         </div>

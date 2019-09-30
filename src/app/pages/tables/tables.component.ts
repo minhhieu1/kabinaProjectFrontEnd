@@ -86,5 +86,6 @@ export class TablesComponent implements OnInit {
     this.shelfStatusForDraw=this.shelfStatus.filter(shelf=>{
       return shelf.shelfId.includes(keyword)
     }) 
+    console.log(this.shelfStatusForDraw)
   }
 }
